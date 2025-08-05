@@ -1,92 +1,81 @@
-:root {
-  text-decoration-skip-ink: #44440a;
-  -moz-background-clip: #000;
-  --shadow: 0 2px 2px rgb(0, 0, 0 / 0.5);
-}
-
-.sacramento-regular {
-  font-family: "Sacramento", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
 body {
-  background-image: url('Background1.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-#hero {
-  background-color: rgba(0, 0, 0, 0.6);
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1e1e2f;
   color: white;
 }
 
-#hero a {
-  color: #f0f0f0;
+#hero {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url('hero-wedding.jpg') center/cover no-repeat;
+  min-height: 100vh;
 }
 
-#hero a:hover {
-  color: #ffffff;
+.nama-mempelai {
+  font-family: 'Sacramento', cursive;
+  font-size: 48px;
+  margin-top: 15px;
 }
 
-.custom-background-quote {
-  height: 60vh;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/prewed.jpg') center/cover no-repeat;
-}
-
-/* Carousel */
 .carousel {
   position: relative;
-  width: 100%;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
 }
 
 .carousel img {
   display: none;
   width: 100%;
   height: auto;
+  object-fit: cover;
 }
 
 .carousel img.active {
   display: block;
 }
 
-.prev, .next {
+.carousel .prev,
+.carousel .next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0,0,0,0.5);
+  border: none;
   color: white;
-  padding: 10px;
-  text-decoration: none;
+  padding: 12px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  font-size: 20px;
 }
 
-.prev {
-  left: 10px;
+.carousel .prev:hover,
+.carousel .next:hover {
+  background-color: rgba(0,0,0,0.8);
 }
 
-.next {
-  right: 10px;
+.carousel .prev { left: 10px; }
+.carousel .next { right: 10px; }
+
+audio {
+  width: 300px;
+  margin: 20px auto;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
-/* Map embed */
-.mapouter {
-  position: relative;
-  width: 100%;
-  height: 400px;
+.custom-background-quote {
+  background: linear-gradient(to bottom, #383858, #2c2c3c);
 }
 
-.gmap_canvas {
-  overflow: hidden;
-  background: none !important;
-  width: 100%;
-  height: 100%;
-}
-
-.footer-text,
-.footer.footer-text {
-  color: #d7d6d6;
+.footer-text {
+  padding: 20px;
+  background-color: #1b1b2a;
 }
