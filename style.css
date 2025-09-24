@@ -1,81 +1,62 @@
+:root {
+    text-decoration-skip-ink: #44440a;
+
+    -moz-background-clip: #000;
+
+    --shadow: 0 2px 2px rgb(0,0,0/0.5)
+}
+
+.sacramento-regular {
+    font-family: "Sacramento", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #1e1e2f;
-  color: white;
-}
-
-#hero {
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-              url('hero-wedding.jpg') center/cover no-repeat;
-  min-height: 100vh;
-}
-
-.nama-mempelai {
-  font-family: 'Sacramento', cursive;
-  font-size: 48px;
-  margin-top: 15px;
+    background-image: url('Background1.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
 }
 
 .carousel {
-  position: relative;
-  max-width: 600px;
-  margin: 40px auto;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .carousel img {
+    display: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .carousel img.active {
+    display: block;
+  }
+
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+#hero {
+    background-color: rgba(0, 0, 0, 0.6);
 }
-
-.carousel-inner {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.carousel img {
-  display: none;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.carousel img.active {
-  display: block;
-}
-
-.carousel .prev,
-.carousel .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.5);
-  border: none;
-  color: white;
-  padding: 12px;
-  cursor: pointer;
-  z-index: 10;
-  border-radius: 50%;
-  font-size: 20px;
-}
-
-.carousel .prev:hover,
-.carousel .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-.carousel .prev { left: 10px; }
-.carousel .next { right: 10px; }
-
-audio {
-  width: 300px;
-  margin: 20px auto;
-  display: block;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-
-.custom-background-quote {
-  background: linear-gradient(to bottom, #383858, #2c2c3c);
-}
-
-.footer-text {
-  padding: 20px;
-  background-color: #1b1b2a;
+.footer.footer-text {
+    color: #d7d6d6;
 }
