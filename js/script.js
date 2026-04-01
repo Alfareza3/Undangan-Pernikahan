@@ -5,11 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         once: true,
         easing: 'ease-in-out'
     });
-    
-    // Initialize Supabase
-    const supabaseUrl = 'https://huqyydzuxycgndhhcyup.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1cXl5ZHp1eHljZ25kaGhjeXVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg2NzU1MjksImV4cCI6MjA3NDI1MTUyOX0.GytO7AFUoQ20UIRSMCIJS5TLxdCF2z1VjyubJyOhiBQ';
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
     
     // Music Control
     const bgMusic = document.getElementById('bgMusic');
@@ -78,25 +74,31 @@ document.addEventListener('DOMContentLoaded', function() {
     rsvpForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        const nama = document.getElementById('nama').value;
-        const jumlah_tamu = document.getElementById('jumlah_tamu').value;
-        const status_kehadiran = document.querySelector('input[name="status_kehadiran"]:checked').value;
-        const pesan = document.getElementById('pesan').value;
+        const rsvpBtn = this.querySelector('button[type="submit"]');
+        const originalText = rsvpBtn.textContent;
+        rsvpBtn.textContent = 'Mengirim...';
+        rsvpBtn.disabled = true;
+
+        const payload = {
+            nama: document.getElementById('nama').value,
+            jumlah_tamu: parseInt(document.getElementById('jumlah_tamu').value),
+            status_kehadiran: document.querySelector('input[name="status_kehadiran"]:checked').value,
+            pesan: document.getElementById('pesan').value
+        };
         
         try {
-            const { data, error } = await supabase
-                .from('rsvp')
-                .insert([
-                    {
-                        nama: nama,
-                        jumlah_tamu: parseInt(jumlah_tamu),
-                        status_kehadiran: status_kehadiran,
-                        pesan: pesan
-                    }
-                ]);
+            const response = await fetch('api/submit_rsvp.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            });
             
-            if (error) {
-                throw error;
+            const result = await response.json();
+            
+            if (result.status !== 'success') {
+                throw new Error(result.message || 'Terjadi kesalahan sistem.');
             }
             
             // Show success message
@@ -127,6 +129,9 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 rsvpAlert.style.display = 'none';
             }, 5000);
+        } finally {
+            rsvpBtn.textContent = originalText;
+            rsvpBtn.disabled = false;
         }
     });
     
@@ -135,14 +140,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const wishesContainer = document.getElementById('wishesContainer');
         
         try {
-            const { data, error } = await supabase
-                .from('rsvp')
-                .select('*')
-                .order('waktu_submit', { ascending: false });
+            const response = await fetch('api/get_wishes.php');
+            const result = await response.json();
             
-            if (error) {
-                throw error;
+            if (result.status !== 'success') {
+                throw new Error('Gagal memuat ucapan dari server');
             }
+            
+            const data = result.data;
             
             if (data.length === 0) {
                 wishesContainer.innerHTML = '<div class="text-center"><p>Belum ada ucapan. Jadilah yang pertama!</p></div>';
